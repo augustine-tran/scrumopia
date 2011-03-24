@@ -146,7 +146,7 @@ class Project extends CActiveRecord
 	 * @return Project status options
 	 */
 	public function setProjectStatus(){
-		return array(0=>'Started', 1=>'Pending', 2=>'Resleased');
+		return array(0=>'Started', 1=>'Pending', 2=>'Released');
 	}
 
 

@@ -25,5 +25,6 @@ $this->menu=array(
 		'story_priority',
 		'story_point',
 		'story_status',
+		'story_sprint',
 	),
 )); ?>

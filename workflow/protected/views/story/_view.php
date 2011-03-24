@@ -28,5 +28,11 @@
 	<?php echo CHtml::encode($data->story_status); ?>
 	<br />
 
+	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('story_sprint')); ?>:</b>
+	<?php echo CHtml::encode($data->story_sprint); ?>
+	<br />
+
+	*/ ?>
 
 </div>

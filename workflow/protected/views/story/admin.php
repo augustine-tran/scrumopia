@@ -50,6 +50,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'story_point',
 		/*
 		'story_status',
+		'story_sprint',
 		*/
 		array(
 			'class'=>'CButtonColumn',

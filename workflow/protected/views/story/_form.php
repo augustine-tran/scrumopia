@@ -23,10 +23,24 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'story_project'); ?>
-		<?php echo $form->dropDownList($model,'story_project',Project::model()->getProjects()); ?>
+		<?php //echo $form->dropDownList($model,'story_project',Project::model()->getProjects()); ?>
+		<?php echo $form->dropDownList($model,'story_project',Project::model()->getProjects(),
+			array(
+                           	'ajax' => array(
+                            'type' => 'POST',
+                            'url' => CController::createUrl('sprint/selectsprints'),
+                            'update' => '#Story_story_sprint')       
+                  )
+              ); ?>
 		<?php echo $form->error($model,'story_project'); ?>
 	</div>
-
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'story_sprint'); ?>
+		<?php echo $form->dropDownList($model,'story_sprint',array()); ?>
+		<?php echo $form->error($model,'story_sprint'); ?>
+	</div>
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'story_priority'); ?>
 		<?php echo $form->textField($model,'story_priority'); ?>

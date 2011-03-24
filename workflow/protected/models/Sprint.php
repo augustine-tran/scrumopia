@@ -96,4 +96,14 @@ class Sprint extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function getSprints($projectID){
+		$sprints=$this->findAll(array('condition'=>'sprint_project=:ID','params'=>array(':ID'=>$projectID),));
+		$_sprints=array();
+		foreach($sprints as $sprint)
+		{
+			$_sprints[$sprint->sprint_id]=$sprint->sprint_code;
+		}
+		return $_sprints;
+	}
 }

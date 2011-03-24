@@ -40,6 +40,11 @@
 		<?php echo $form->textField($model,'story_status',array('size'=>45,'maxlength'=>45)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'story_sprint'); ?>
+		<?php echo $form->textField($model,'story_sprint'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

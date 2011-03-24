@@ -26,21 +26,21 @@ class SprintController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+		array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+		),
+		array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update','selectsprints'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+		),
+		array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
+		),
+		array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+		),
 		);
 	}
 
@@ -70,7 +70,7 @@ class SprintController extends Controller
 		{
 			$model->attributes=$_POST['Sprint'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->sprint_id));
+			$this->redirect(array('view','id'=>$model->sprint_id));
 		}
 
 		$this->render('create',array(
@@ -94,7 +94,7 @@ class SprintController extends Controller
 		{
 			$model->attributes=$_POST['Sprint'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->sprint_id));
+			$this->redirect(array('view','id'=>$model->sprint_id));
 		}
 
 		$this->render('update',array(
@@ -116,10 +116,10 @@ class SprintController extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -141,7 +141,7 @@ class SprintController extends Controller
 		$model=new Sprint('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Sprint']))
-			$model->attributes=$_GET['Sprint'];
+		$model->attributes=$_GET['Sprint'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -157,7 +157,7 @@ class SprintController extends Controller
 	{
 		$model=Sprint::model()->findByPk((int)$id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+		throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
 
@@ -172,5 +172,19 @@ class SprintController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionSelectsprints()
+	{
+		$data = Sprint::model()->findAll('sprint_project=:projectID',
+		array(':projectID'=>(int) $_POST['Story']['story_project']));
+
+		$data = CHtml::listData($data,'sprint_id','sprint_code');
+		
+		foreach($data as $id => $value)
+		{
+			echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);
+		}
+		
 	}
 }
