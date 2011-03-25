@@ -31,7 +31,7 @@ class SprintController extends Controller
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectsprints'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -64,7 +64,7 @@ class SprintController extends Controller
 		$model=new Sprint;
 
 		// Uncomment the following line if AJAX validation is needed
-		//$this->performAjaxValidation($model);
+		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Sprint']))
 		{
@@ -179,12 +179,12 @@ class SprintController extends Controller
 		$data = Sprint::model()->findAll('sprint_project=:projectID',
 		array(':projectID'=>(int) $_POST['Story']['story_project']));
 
-		$data = CHtml::listData($data,'sprint_id','sprint_code');
-		
+		$data = CHtml::listData($data,'sprint_id','sprint_name');
+
 		foreach($data as $id => $value)
 		{
 			echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);
 		}
-		
+
 	}
 }

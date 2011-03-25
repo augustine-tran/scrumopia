@@ -15,7 +15,11 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('story_project')); ?>:</b>
 	<?php echo CHtml::encode($data->project->project_name); ?>
 	<br />
-
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('story_sprint')); ?>:</b>
+	<?php echo CHtml::encode($data->sprint->sprint_name); ?>
+	<br />
+	
 	<b><?php echo CHtml::encode($data->getAttributeLabel('story_priority')); ?>:</b>
 	<?php echo CHtml::encode($data->getStorypriority()); ?>
 	<br />

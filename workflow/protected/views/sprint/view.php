@@ -18,11 +18,15 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'sprint_id',
-		'sprint_code',
 		'sprint_name',
 		'sprint_description',
-		'sprint_project',
-		'sprint_status',
+		array(
+			'label'=>'Project',
+			'type'=>'raw',
+			'value'=>$model->project->project_name),
+		array(
+			'label'=>'Status',
+			'type'=>'raw',
+			'value'=>$model->getSprintstatuscaption()),
 	),
 )); ?>

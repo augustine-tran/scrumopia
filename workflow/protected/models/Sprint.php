@@ -38,13 +38,13 @@ class Sprint extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sprint_code, sprint_name, sprint_project, sprint_status', 'required'),
-			array('sprint_project, sprint_status', 'numerical', 'integerOnly'=>true),
-			array('sprint_code, sprint_name', 'length', 'max'=>45),
-			array('sprint_description', 'length', 'max'=>1000),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('sprint_id, sprint_code, sprint_name, sprint_description, sprint_project, sprint_status', 'safe', 'on'=>'search'),
+		array('sprint_name, sprint_project, sprint_status', 'required'),
+		array('sprint_project, sprint_status', 'numerical', 'integerOnly'=>true),
+		array('sprint_name', 'length', 'max'=>45),
+		array('sprint_description', 'length', 'max'=>1000),
+		// The following rule is used by search().
+		// Please remove those attributes that should not be searched.
+		array('sprint_name, sprint_description, sprint_project, sprint_status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +56,7 @@ class Sprint extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'project'=>array(self::BELONGS_TO,'Project', 'sprint_project'),
 		);
 	}
 
@@ -96,7 +97,7 @@ class Sprint extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	public function getSprints($projectID){
 		$sprints=$this->findAll(array('condition'=>'sprint_project=:ID','params'=>array(':ID'=>$projectID),));
 		$_sprints=array();
@@ -105,5 +106,22 @@ class Sprint extends CActiveRecord
 			$_sprints[$sprint->sprint_id]=$sprint->sprint_code;
 		}
 		return $_sprints;
+	}
+	
+	public function setSprintstatusoptions(){
+		return array('0'=>'Pending','1'=>'Inprogress','2'=>'Done');
+	}
+	
+	public function getSprintstatuscaption(){
+		switch ($this->sprint_status) {
+			case 0:
+				return 'Pending';
+			case 1:
+				return 'InProgress';
+			case 2:
+				return 'Done';
+			default:
+				return '';
+		}
 	}
 }
