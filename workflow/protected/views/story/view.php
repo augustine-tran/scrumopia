@@ -18,13 +18,24 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'story_id',
 		'story_code',
 		'story_description',
-		'story_project',
-		'story_priority',
+		array(
+			'label'=>'Project',
+			'type'=>'raw',
+			'value'=>$model->project->project_name),
+		array(
+			'label'=>'Priority',
+			'type'=>'raw',
+			'value'=>$model->getStorypriority()),
 		'story_point',
-		'story_status',
-		'story_sprint',
+		array(
+			'label'=>'Status',
+			'type'=>'raw',
+			'value'=>$model->getStorystatus()),
+		array(
+			'label'=>'Sprint',
+			'type'=>'raw',
+			'value'=>$model->sprint->sprint_name),
 	),
 )); ?>

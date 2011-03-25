@@ -2,7 +2,7 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'story-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -26,10 +26,11 @@
 		<?php //echo $form->dropDownList($model,'story_project',Project::model()->getProjects()); ?>
 		<?php echo $form->dropDownList($model,'story_project',Project::model()->getProjects(),
 			array(
-                           	'ajax' => array(
-                            'type' => 'POST',
-                            'url' => CController::createUrl('sprint/selectsprints'),
-                            'update' => '#Story_story_sprint')       
+					'empty'=>'------------  Select a project  ------------',
+					'ajax' => array(
+					'type' => 'POST',
+					'url' => CController::createUrl('sprint/selectsprints'),
+					'update' => '#Story_story_sprint')       
                   )
               ); ?>
 		<?php echo $form->error($model,'story_project'); ?>
@@ -37,13 +38,13 @@
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'story_sprint'); ?>
-		<?php echo $form->dropDownList($model,'story_sprint',array()); ?>
+		<?php echo $form->dropDownList($model,'story_sprint',array(),array('style'=>'width:200px')); ?>
 		<?php echo $form->error($model,'story_sprint'); ?>
 	</div>
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'story_priority'); ?>
-		<?php echo $form->textField($model,'story_priority'); ?>
+		<?php echo $form->dropDownList($model,'story_priority',$model->setStorypriority()); ?>
 		<?php echo $form->error($model,'story_priority'); ?>
 	</div>
 
@@ -55,7 +56,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'story_status'); ?>
-		<?php echo $form->textField($model,'story_status',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->dropDownList($model,'story_status',$model->setStorystatus()); ?>
 		<?php echo $form->error($model,'story_status'); ?>
 	</div>
 

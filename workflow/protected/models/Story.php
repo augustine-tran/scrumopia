@@ -58,6 +58,8 @@ class Story extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'project'=>array(self::BELONGS_TO, 'Project', 'story_project'),
+			'sprint'=>array(self::BELONGS_TO, 'Sprint','story_sprint'),
 		);
 	}
 
@@ -103,4 +105,42 @@ class Story extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function setStorypriority(){
+		return array('0'=>'Must Have','1'=>'Should Have','2'=>'Could Have','3'=>'Would Have');
+	}
+	
+	public function setStorystatus(){
+		return array('0'=>'Pending','1'=>'Inprogress','2'=>'Done');
+	}
+	
+	public function getStorypriority(){
+		switch ($this->story_priority) {
+			case 0:
+				return 'Must Have';
+			case 1:
+				return 'Should Have';
+			case 2:
+				return 'Could Have';
+			case 3:
+				return 'Would Have';
+			default:
+				return '';
+		}
+	}
+	
+	public function getStorystatus(){
+		switch ($this->story_status) {
+			case 0:
+				return 'Pending';
+			case 1:
+				return 'Inprogress';
+			case 2:
+				return 'Done';
+			default:
+				return '';
+		}
+	}
+	
+	
 }

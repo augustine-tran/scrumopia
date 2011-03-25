@@ -64,7 +64,7 @@ class SprintController extends Controller
 		$model=new Sprint;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		//$this->performAjaxValidation($model);
 
 		if(isset($_POST['Sprint']))
 		{
