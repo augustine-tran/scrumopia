@@ -36,7 +36,7 @@ class ProjectUser extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('project_id, user_id', 'required'),
-			array('project_id, user_id', 'numerical', 'integerOnly'=>true),
+			array('project_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, project_id, user_id', 'safe', 'on'=>'search'),

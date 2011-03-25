@@ -159,4 +159,41 @@ class Project extends CActiveRecord
 		}
 		return $_projects;
 	}
+
+
+	/**
+	 * Returns an array of available roles in which a user can be
+	 placed when being added to a project
+	 */
+	public static function getUserRoleOptions()
+	{
+		return CHtml::listData(Yii::app()->authManager->getRoles(),'name', 'name');
+	}
+
+	/**
+	 * Makes an association between a user and a the project
+	 */
+	public function associateUserToProject($user)
+	{
+		$sql = "INSERT INTO project_user (project_id,
+					user_id) VALUES (:projectId, :userId)";
+		$command = Yii::app()->db->createCommand($sql);
+		$command->bindValue(":projectId", $this->project_id, PDO::PARAM_INT);
+		$command->bindValue(":userId", $user->id, PDO::PARAM_INT);
+		return $command->execute();
+	}
+	/*
+	 * Determines whether or not a user is already part of a project
+	 */
+	public function isUserInProject($user)
+	{
+		$sql = "SELECT user_id FROM project_user WHERE
+					project_id=:projectId AND user_id=:userId";
+		$command = Yii::app()->db->createCommand($sql);
+		$command->bindValue(":projectId", $this->project_id, PDO::PARAM_INT);
+		$command->bindValue(":userId", $user->id, PDO::PARAM_INT);
+		return $command->execute()==1 ? true : false;
+	}
+
+
 }

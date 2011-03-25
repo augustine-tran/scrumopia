@@ -10,7 +10,7 @@ $this->menu=array(
 	array('label'=>'Update Project', 'url'=>array('update', 'id'=>$model->project_id)),
 	array('label'=>'Delete Project', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->project_id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Project', 'url'=>array('admin')),
-	//array('label'=>'Create story', 'url'=>array('story/create')),
+	array('label'=>'Add User To Project','url'=>array('adduser','id'=>$model->project_id)),
 );
 ?>
 

@@ -17,7 +17,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'user_id'); ?>
-		<?php echo $form->textField($model,'user_id'); ?>
+		<?php echo $form->checkBoxList($model,'user_id',Project::model()->getProjectOwnerOptions()); ?>
 		<?php echo $form->error($model,'user_id'); ?>
 	</div>
 

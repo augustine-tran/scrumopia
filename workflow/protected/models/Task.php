@@ -6,11 +6,11 @@
  * The followings are the available columns in table 'task':
  * @property integer $task_id
  * @property string $task_code
- * @property string $task_description
+ * @property integer $task_user
  * @property integer $story_id
  * @property integer $task_hours
+ * @property string $task_description
  * @property integer $task_status
- * @property integer $task_user
  */
 class Task extends CActiveRecord
 {
@@ -39,12 +39,12 @@ class Task extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('task_description, story_id, task_hours, task_status, task_user', 'required'),
-			array('story_id, task_hours, task_status, task_user', 'numerical', 'integerOnly'=>true),
-			array('task_description', 'length', 'max'=>1000),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('task_id, task_code, task_description, story_id, task_hours, task_status, task_user', 'safe', 'on'=>'search'),
+		array('task_code,story_id, task_hours, task_description, task_status', 'required'),
+		array('task_user, story_id, task_hours, task_status', 'numerical', 'integerOnly'=>true),
+		array('task_description', 'length', 'max'=>1000),
+		// The following rule is used by search().
+		// Please remove those attributes that should not be searched.
+		array('task_code, task_user, story_id, task_hours, task_description, task_status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,11 +67,11 @@ class Task extends CActiveRecord
 		return array(
 			'task_id' => 'Task',
 			'task_code' => 'Task Code',
-			'task_description' => 'Task Description',
+			'task_user' => 'Task User',
 			'story_id' => 'Story',
 			'task_hours' => 'Task Hours',
+			'task_description' => 'Task Description',
 			'task_status' => 'Task Status',
-			'task_user' => 'Task User',
 		);
 	}
 
@@ -88,14 +88,17 @@ class Task extends CActiveRecord
 
 		$criteria->compare('task_id',$this->task_id);
 		$criteria->compare('task_code',$this->task_code,true);
-		$criteria->compare('task_description',$this->task_description,true);
+		$criteria->compare('task_user',$this->task_user);
 		$criteria->compare('story_id',$this->story_id);
 		$criteria->compare('task_hours',$this->task_hours);
+		$criteria->compare('task_description',$this->task_description,true);
 		$criteria->compare('task_status',$this->task_status);
-		$criteria->compare('task_user',$this->task_user);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	public function setTaskoptions(){
+		return array('0'=>'To do','1'=>'In Progress','2'=>'Tobe verify','3'=>'Done');
 	}
 }

@@ -26,21 +26,21 @@ class ProjectController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+		array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+		),
+		array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update','adduser'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+		),
+		array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
+		),
+		array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+		),
 		);
 	}
 
@@ -73,7 +73,7 @@ class ProjectController extends Controller
 			$model->date_start=strtotime($model->date_start);
 			$model->end=strtotime($model->end);
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->project_id));
+			$this->redirect(array('view','id'=>$model->project_id));
 		}
 
 		$this->render('create',array(
@@ -97,7 +97,7 @@ class ProjectController extends Controller
 		{
 			$model->attributes=$_POST['Project'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->project_id));
+			$this->redirect(array('view','id'=>$model->project_id));
 		}
 
 		$this->render('update',array(
@@ -119,10 +119,10 @@ class ProjectController extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -144,7 +144,7 @@ class ProjectController extends Controller
 		$model=new Project('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Project']))
-			$model->attributes=$_GET['Project'];
+		$model->attributes=$_GET['Project'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -160,7 +160,7 @@ class ProjectController extends Controller
 	{
 		$model=Project::model()->findByPk((int)$id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+		throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
 
@@ -175,5 +175,32 @@ class ProjectController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionAdduser($id)
+	{
+		$form=new ProjectUserForm;
+		$project = $this->loadModel($id);
+		// collect user input data
+		if(isset($_POST['ProjectUserForm']))
+		{
+			$form->attributes=$_POST['ProjectUserForm'];
+			$form->project = $project;
+			// validate user input and set a sucessfull flassh message if valid
+			if($form->validate())
+			{
+				Yii::app()->user->setFlash('success',$form->username ." has been added to the project." );
+				$form=new ProjectUserForm;
+			}
+		}
+		// display the add user form
+		$users = Yii::app()->getModule('user')->user()->findAll();
+		$usernames=array();
+		foreach($users as $user)
+		{
+			$usernames[]=$user->username;
+		}
+		$form->project = $project;
+		$this->render('adduser',array('model'=>$form,'usernames'=>$usernames));
 	}
 }

@@ -17,13 +17,14 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'task_description'); ?>
-		<?php echo $form->textField($model,'task_description',array('size'=>60,'maxlength'=>1000)); ?>
+		<?php echo $form->textArea($model,'task_description',array('rows'=>15, 'cols'=>70, 'maxlength'=>1000)); ?>
 		<?php echo $form->error($model,'task_description'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'story_id'); ?>
-		<?php echo $form->textField($model,'story_id'); ?>
+		<?php echo $form->dropDownlist($model,'story_id',
+			CHtml::listData(Story::model()->findAll(),'story_id','story_code')); ?>
 		<?php echo $form->error($model,'story_id'); ?>
 	</div>
 
@@ -35,13 +36,16 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'task_status'); ?>
-		<?php echo $form->textField($model,'task_status'); ?>
+		<?php echo $form->dropDownlist($model,'task_status',$model->setTaskoptions()); ?>
 		<?php echo $form->error($model,'task_status'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'task_user'); ?>
-		<?php echo $form->textField($model,'task_user'); ?>
+		<?php echo $form->dropDownlist($model,'task_user',
+					Project::model()->getProjectOwnerOptions(),
+					array('empty'=>'--------   Select a user    --------')
+		); ?>
 		<?php echo $form->error($model,'task_user'); ?>
 	</div>
 

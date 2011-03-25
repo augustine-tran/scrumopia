@@ -68,9 +68,16 @@ class ProjectUserController extends Controller
 
 		if(isset($_POST['ProjectUser']))
 		{
-			$model->attributes=$_POST['ProjectUser'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->project_id=$_POST['ProjectUser']['project_id'];
+			$users=$_POST['ProjectUser']['user_id'];
+			
+			foreach ($users as $userID) {
+				$model->user_id=$userID;
+				$model->save();
+				print_r($model->save());
+			}
+			exit;
+			$this->redirect(array('view','id'=>''));
 		}
 
 		$this->render('create',array(

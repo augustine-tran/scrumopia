@@ -44,6 +44,10 @@ return array(
              'allowAutoLogin'=>true,
              'loginUrl' => array('/user/login'),
          ),
+         'authManager'=>array(
+            'class'=>'CDbAuthManager',
+            'connectionID'=>'db',
+        ),
 	
 		// uncomment the following to enable URLs in path-format
 		
@@ -86,6 +90,7 @@ return array(
 				
 				array(
 					'class'=>'CWebLogRoute',
+					'categories' => 'system.db.*'
 				),
 			),
 		),
