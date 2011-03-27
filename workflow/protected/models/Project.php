@@ -58,6 +58,7 @@ class Project extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'projectuser'=>array(self::HAS_MANY,'ProjectUser','project_id'),
 		);
 	}
 
@@ -161,6 +162,14 @@ class Project extends CActiveRecord
 	}
 
 
+	public function getUserofproject(){
+		$projectusers=$this->projectuser;
+		$users=array();		
+		foreach ($projectusers as $projectuser) {
+			$users[]=$projectuser->user_id;
+		}
+	}
+
 	/**
 	 * Returns an array of available roles in which a user can be
 	 placed when being added to a project
@@ -194,6 +203,18 @@ class Project extends CActiveRecord
 		$command->bindValue(":userId", $user->id, PDO::PARAM_INT);
 		return $command->execute()==1 ? true : false;
 	}
+
+	public function associateUserToRole($role, $userId)
+	{
+		$sql = "INSERT INTO projectuserrole (project_id, user_id, role) VALUES (:projectId, :userId, :role)";
+		$command = Yii::app()->db->createCommand($sql);
+		$command->bindValue(":projectId", $this->project_id, PDO::PARAM_INT);
+		$command->bindValue(":userId", $userId, PDO::PARAM_INT);
+		$command->bindValue(":role", $role, PDO::PARAM_STR);
+		return $command->execute();
+	}
+
+
 
 
 }

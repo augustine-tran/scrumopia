@@ -10,7 +10,7 @@ $this->menu=array(
 <h1>Add User To <?php echo $model->project->project_name; ?></h1>
 <?php if(Yii::app()->user->hasFlash('success')):?>
      <div class="successMessage">
-          <?php echo Yii::app()->user()->getFlash('success'); ?>
+          <?php echo Yii::app()->user->getFlash('success'); ?>
      </div>
 <?php endif; ?>
 <div class="form">

@@ -23,9 +23,4 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('project_owner')); ?>:</b>
 	<?php echo CHtml::encode($data->getProjectOwnerName()); ?>
 	<br />
-
-
-	
-
-
 </div>

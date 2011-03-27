@@ -39,3 +39,4 @@ $this->menu=array(
 			'value'=>date("d - m - Y",$model->end)),
 	),
 )); ?>
+
