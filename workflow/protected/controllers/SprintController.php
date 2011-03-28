@@ -62,7 +62,7 @@ class SprintController extends Controller
 	public function actionCreate()
 	{
 		$model=new Sprint;
-
+		$model->sprint_project=$_GET['project_id'];
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 

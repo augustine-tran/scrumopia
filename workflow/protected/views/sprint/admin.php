@@ -7,6 +7,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Sprint', 'url'=>array('index')),
 	array('label'=>'Create Sprint', 'url'=>array('create')),
+	array('label'=>'Create Sprint', 'url'=>array('project/view','id'=>$model->project->project_id)),
 );
 
 Yii::app()->clientScript->registerScript('search', "

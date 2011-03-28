@@ -47,6 +47,7 @@ class Project extends CActiveRecord
 		// The following rule is used by search().
 		// Please remove those attributes that should not be searched.
 		array('project_id, project_owner, project_name, project_description, project_status, date_start, end', 'safe', 'on'=>'search'),
+		
 		);
 	}
 
@@ -60,6 +61,7 @@ class Project extends CActiveRecord
 		return array(
 			'projectuser'=>array(self::HAS_MANY,'ProjectUser','project_id'),
 			'projectuserprofile'=>array(self::MANY_MANY,'Profile','project_user(project_id,user_id)'),
+			'sprint'=>array(self::HAS_MANY,'Sprint','sprint_project'),
 		);
 	}
 
@@ -170,6 +172,19 @@ class Project extends CActiveRecord
 			$users[]=$projectuser->firstname.' '.$projectuser->lastname;
 		}
 		return $users;
+	}
+	
+	/**
+	 * @return Sprint of prject object
+	 */
+	public function getSprintofproject(){
+		$sprintprojects=$this->sprint;
+		
+		$sprints=array();
+		foreach ($sprintprojects as $sprint) {
+			$sprints[]=$sprint;
+		}
+		return $sprints;
 	}
 
 	/**

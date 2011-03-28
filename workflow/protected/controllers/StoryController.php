@@ -176,11 +176,12 @@ class StoryController extends Controller
 
 	public function actionSelectSprints()
 	{
-		$data = Worldareasstates::model()->findAll('CountryID=:parent_id',
-		array(':parent_id'=>(int) $_POST['Wsmembersdetails']['CountryID']));
+		$data = Sprint::model()->findAll('sprint_id=:ID',
+		array(':ID'=>(int) $_POST['Story']['story_project']));
 
 
-		$data = CHtml::listData($data,'StateID','StateName');
+		$data = CHtml::listData($data,'sprint_id','sprint_name');
+		
 		foreach($data as $id => $value)
 		{
 			echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);

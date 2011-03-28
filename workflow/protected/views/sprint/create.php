@@ -7,6 +7,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Sprint', 'url'=>array('index')),
 	array('label'=>'Manage Sprint', 'url'=>array('admin')),
+	array('label'=>'Back to project', 'url'=>array('project/view','id'=>$model->sprint_project)),
 );
 ?>
 

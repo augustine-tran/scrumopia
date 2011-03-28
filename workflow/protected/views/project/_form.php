@@ -7,11 +7,11 @@
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model);   ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'project_owner'); ?>
-		<?php echo $form->dropDownList($model,'project_owner',$model->getProjectOwnerOptions()); ?>
+		<?php echo $form->dropDownList($model,'project_owner',$model->getProjectOwnerOptions());?>
 		<?php echo $form->error($model,'project_owner'); ?>
 	</div>
 
