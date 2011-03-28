@@ -62,7 +62,8 @@ class StoryController extends Controller
 	public function actionCreate()
 	{
 		$model=new Story;
-
+		$model->story_project=$_GET['story_project'];
+		$model->story_sprint=$_GET['story_sprint'];
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 

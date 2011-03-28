@@ -39,8 +39,10 @@ class Task extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('story_id, task_hours, task_description, task_status', 'required'),
+			array('task_code, story_id, task_hours, task_description, task_status', 'required'),
 			array('task_user, story_id, task_hours, task_status', 'numerical', 'integerOnly'=>true),
+			array('task_code', 'length', 'max'=>45),
+			array('task_code', 'unique'),
 			array('task_description', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

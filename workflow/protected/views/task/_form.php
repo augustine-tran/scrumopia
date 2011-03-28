@@ -17,14 +17,11 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'task_user'); ?>
-		<?php echo $form->textField($model,'task_user'); ?>
+		<?php echo $form->dropDownlist($model,'task_user',
+			CHtml::listData(Project::model()->findBypk
+			(Story::model()->findByPk($model->story_id)
+			->story_project)->projectuserprofile,'user_id','firstname'));?>
 		<?php echo $form->error($model,'task_user'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'story_id'); ?>
-		<?php echo $form->textField($model,'story_id'); ?>
-		<?php echo $form->error($model,'story_id'); ?>
 	</div>
 
 	<div class="row">
@@ -35,7 +32,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'task_description'); ?>
-		<?php echo $form->textField($model,'task_description',array('size'=>60,'maxlength'=>1000)); ?>
+		<?php echo $form->textArea($model,'task_description',array('rows'=>15, 'cols'=>70, 'maxlength'=>1000)); ?>
 		<?php echo $form->error($model,'task_description'); ?>
 	</div>
 

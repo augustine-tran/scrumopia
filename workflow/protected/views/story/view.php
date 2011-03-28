@@ -10,6 +10,7 @@ $this->menu=array(
 	array('label'=>'Update Story', 'url'=>array('update', 'id'=>$model->story_id)),
 	array('label'=>'Delete Story', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->story_id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Story', 'url'=>array('admin')),
+	array('label'=>'New task','url'=>array('task/create','story_id'=>$model->story_id)),
 );
 ?>
 

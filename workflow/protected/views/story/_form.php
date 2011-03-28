@@ -21,10 +21,10 @@
 		<?php echo $form->error($model,'story_description'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'story_project'); ?>
+	<!-- <div class="row">
+		<?php //echo $form->labelEx($model,'story_project'); ?>
 		<?php //echo $form->dropDownList($model,'story_project',Project::model()->getProjects()); ?>
-		<?php echo $form->dropDownList($model,'story_project',Project::model()->getProjects(),
+		<?php /*echo $form->dropDownList($model,'story_project',Project::model()->getProjects(),
 			array(
 					'empty'=>'------------  Select a project  ------------',
 					'ajax' => array(
@@ -32,15 +32,15 @@
 					'url' => CController::createUrl('sprint/selectsprints'),
 					'update' => '#Story_story_sprint')       
                   )
-              ); ?>
-		<?php echo $form->error($model,'story_project'); ?>
+              )*/; ?>
+		<?php //echo $form->error($model,'story_project'); ?>
 	</div>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'story_sprint'); ?>
-		<?php echo $form->dropDownList($model,'story_sprint',array(),array('style'=>'width:200px')); ?>
-		<?php echo $form->error($model,'story_sprint'); ?>
-	</div>
+		<?php //echo $form->labelEx($model,'story_sprint'); ?>
+		<?php //echo $form->dropDownList($model,'story_sprint',array(),array('style'=>'width:200px')); ?>
+		<?php //echo $form->error($model,'story_sprint'); ?>
+	</div> -->
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'story_priority'); ?>

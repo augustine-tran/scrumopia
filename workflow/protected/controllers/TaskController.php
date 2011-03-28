@@ -62,13 +62,14 @@ class TaskController extends Controller
 	public function actionCreate()
 	{
 		$model=new Task;
-
+		$model->story_id=$_GET['story_id'];
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+		
 		if(isset($_POST['Task']))
 		{
 			$model->attributes=$_POST['Task'];
+			//print_r($_POST['Task']['task_code']);exit;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->task_id));
 		}

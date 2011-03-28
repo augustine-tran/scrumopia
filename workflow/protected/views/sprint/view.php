@@ -10,6 +10,7 @@ $this->menu=array(
 	array('label'=>'Update Sprint', 'url'=>array('update', 'id'=>$model->sprint_id)),
 	array('label'=>'Delete Sprint', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->sprint_id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Sprint', 'url'=>array('admin')),
+	array('label'=>'New story','url'=>array('story/create','story_sprint'=>$model->sprint_id,'story_project'=>$model->sprint_project)),
 );
 ?>
 
