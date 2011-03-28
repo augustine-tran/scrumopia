@@ -20,4 +20,19 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+
+
+	public function behaviors()
+	{
+		return array(
+        'RBACAccessComponent'=>array(
+            'class'=>'application.modules.rbac.components.RBACAccessVerifier',
+		// optional default settings
+            'checkDefaultIndex'=>'id', // used with buisness Rules if no Index given
+            'allowCaching'=>false,  // cache RBAC Tree -- do not enable while development ;)
+            'accessDeniedUrl'=>'/user/login',// used if User is logged in
+            'loginUrl'=>'/user/login'// used if User is NOT logged in
+		),
+		);
+	}
 }

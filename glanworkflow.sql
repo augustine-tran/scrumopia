@@ -1,6 +1,6 @@
 /*
-SQLyog Community v8.82 
-MySQL - 5.5.8 : Database - glanworkflow
+SQLyog Community- MySQL GUI v8.21 
+MySQL - 5.1.41 : Database - glanworkflow
 *********************************************************************
 */
 
@@ -30,7 +30,7 @@ CREATE TABLE `authassignment` (
 
 /*Data for the table `authassignment` */
 
-insert  into `authassignment`(`itemname`,`userid`,`bizrule`,`data`) values ('admin','1','return isset($params[\"project\"]) && $params[\"project\"]->isUserInRole(\"admin\");','N;'),('admin','2','return isset($params[\"project\"]) && $params[\"project\"]->isUserInRole(\"admin\");','N;'),('admin','3',NULL,NULL),('client','1','return isset($params[\"project\"]) && $params[\"project\"]->isUserInRole(\"client\");','N;'),('client','10',NULL,NULL),('client','11',NULL,'N;'),('client','12',NULL,'N;'),('client','13',NULL,'N;'),('client','14',NULL,'N;'),('client','15',NULL,'N;'),('client','16',NULL,'N;'),('client','17',NULL,'N;'),('client','18',NULL,'N;'),('client','19',NULL,'N;'),('client','20',NULL,'N;'),('client','21',NULL,'N;'),('client','22',NULL,'N;'),('client','23',NULL,'N;'),('client','24',NULL,'N;'),('client','25',NULL,'N;'),('client','26',NULL,'N;'),('client','27',NULL,'N;'),('client','28',NULL,'N;'),('client','29',NULL,'N;'),('client','30',NULL,'N;'),('client','31',NULL,'N;'),('client','32',NULL,'N;'),('client','33',NULL,'N;'),('client','34',NULL,'N;'),('client','35',NULL,'N;'),('client','36',NULL,'N;'),('client','37',NULL,'N;'),('client','38',NULL,'N;'),('client','39',NULL,'N;'),('client','40',NULL,'N;'),('client','41',NULL,'N;'),('client','42',NULL,'N;'),('client','43',NULL,'N;'),('client','44',NULL,'N;'),('client','45',NULL,'N;'),('client','46',NULL,'N;'),('client','47',NULL,'N;');
+insert  into `authassignment`(`itemname`,`userid`,`bizrule`,`data`) values ('RbacAssignmentViewer','2','',''),('SuperAdmin','1','',''),('SuperAdmin','3','','');
 
 /*Table structure for table `authitem` */
 
@@ -47,7 +47,7 @@ CREATE TABLE `authitem` (
 
 /*Data for the table `authitem` */
 
-insert  into `authitem`(`name`,`type`,`description`,`bizrule`,`data`) values ('admin',2,NULL,NULL,NULL),('client',2,NULL,NULL,NULL),('guest',2,NULL,NULL,NULL);
+insert  into `authitem`(`name`,`type`,`description`,`bizrule`,`data`) values ('create',2,'create something','',''),('RbacAdmin',2,'','',''),('RbacAssignmentEditor',1,'','',''),('RbacAssignmentViewer',0,'','',''),('RbacEditor',1,'','',''),('RbacViewer',0,'','',''),('registered',2,'Default role by Yii-conf','return !Yii::app()->user->isGuest;',''),('SuperAdmin',2,'','','');
 
 /*Table structure for table `authitemchild` */
 
@@ -62,7 +62,7 @@ CREATE TABLE `authitemchild` (
 
 /*Data for the table `authitemchild` */
 
-insert  into `authitemchild`(`parent`,`child`) values ('admin','client'),('client','guest');
+insert  into `authitemchild`(`parent`,`child`) values ('SuperAdmin','RbacAdmin'),('RbacAdmin','RbacAssignmentEditor'),('RbacAssignmentEditor','RbacAssignmentViewer'),('RbacAdmin','RbacEditor'),('RbacEditor','RbacViewer');
 
 /*Table structure for table `comment` */
 
@@ -167,11 +167,11 @@ CREATE TABLE `project_user` (
   `project_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `project_user` */
 
-insert  into `project_user`(`id`,`project_id`,`user_id`) values (16,4,1),(17,4,2);
+insert  into `project_user`(`id`,`project_id`,`user_id`) values (16,4,1),(17,4,2),(18,5,3);
 
 /*Table structure for table `projectuserrole` */
 
@@ -266,7 +266,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`password`,`email`,`activkey`,`createtime`,`lastvisit`,`superuser`,`status`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','webmaster@example.com','9a24eff8c15a6a141ece27eb6947da0f',1261146094,1300930882,1,1),(2,'demo','fe01ce2a7fbac8fafaed7c982a04e229','demo@example.com','099f825543f7850cc038b90aaff39fac',1261146096,0,0,1),(3,'vansunny12','e10adc3949ba59abbe56e057f20f883e','vannguyen@kinsale.vn','1d4639db4642b782f5992a5f963c2b0f',1301215948,1301215948,0,1);
+insert  into `user`(`id`,`username`,`password`,`email`,`activkey`,`createtime`,`lastvisit`,`superuser`,`status`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','webmaster@example.com','9a24eff8c15a6a141ece27eb6947da0f',1261146094,1301280898,1,1),(2,'demo','fe01ce2a7fbac8fafaed7c982a04e229','demo@example.com','099f825543f7850cc038b90aaff39fac',1261146096,1301280870,0,1),(3,'vansunny12','e10adc3949ba59abbe56e057f20f883e','vannguyen@kinsale.vn','1d4639db4642b782f5992a5f963c2b0f',1301215948,1301215948,0,1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
