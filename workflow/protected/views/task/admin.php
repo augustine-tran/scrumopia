@@ -44,12 +44,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'task_id',
 		'task_code',
-		'task_description',
+		'task_user',
 		'story_id',
 		'task_hours',
-		'task_status',
+		'task_description',
 		/*
-		'task_user',
+		'task_status',
 		*/
 		array(
 			'class'=>'CButtonColumn',

@@ -47,16 +47,22 @@ $this->menu=array(
 	<?php } ?>
 </div>
 
-<div id="sprint"><br/>
+<div id="sprint"><br/><!-- Viewing sprint of project -->
 	<h2>Sprint: </h2>
 	<?php foreach ($model->getSprintofproject() as $sprint) {?>
 		<label><?php echo CHtml::link($sprint->sprint_name,array('sprint/view','id'=>$sprint->sprint_id));?></label><br/>
-			<div id="stories">
+			<div id="stories"> <!-- Viewing stories of sprint -->
 				<h5>Story: </h5>
 				<?php foreach (Story::model()->findAll('story_sprint=:ID',array(':ID'=>$sprint->sprint_id)) as $story) {
 					echo CHtml::link($story->story_code,array('story/view','id'=>$story->story_id));?>
-					<br/>
+					<div id="task"><!-- Viewing task of story -->
+						<h6>Task: </h6>
+						<?php foreach (Task::model()->findAll('story_id=:ID',array(':ID'=>$story->story_id)) as $task) {
+							echo CHtml::link($task->task_code,array('task/view','id'=>$task->task_id));?>
+							<br />
+						<?php }?>
+					</div><br/><!-- End viewing task of story -->
 				<?php } ?>
-			</div><br />
+			</div><br /><!-- End viewing stories of sprint -->
 	<?php } ?>
-</div>
+</div><!-- End viewing sprint of project -->

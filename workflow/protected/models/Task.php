@@ -39,12 +39,12 @@ class Task extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		array('task_code,story_id, task_hours, task_description, task_status', 'required'),
-		array('task_user, story_id, task_hours, task_status', 'numerical', 'integerOnly'=>true),
-		array('task_description', 'length', 'max'=>1000),
-		// The following rule is used by search().
-		// Please remove those attributes that should not be searched.
-		array('task_code, task_user, story_id, task_hours, task_description, task_status', 'safe', 'on'=>'search'),
+			array('story_id, task_hours, task_description, task_status', 'required'),
+			array('task_user, story_id, task_hours, task_status', 'numerical', 'integerOnly'=>true),
+			array('task_description', 'length', 'max'=>1000),
+			// The following rule is used by search().
+			// Please remove those attributes that should not be searched.
+			array('task_id, task_code, task_user, story_id, task_hours, task_description, task_status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -97,8 +97,5 @@ class Task extends CActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
-	}
-	public function setTaskoptions(){
-		return array('0'=>'To do','1'=>'In Progress','2'=>'Tobe verify','3'=>'Done');
 	}
 }

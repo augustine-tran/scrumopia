@@ -20,10 +20,10 @@ $this->menu=array(
 	'attributes'=>array(
 		'task_id',
 		'task_code',
-		'task_description',
+		'task_user',
 		'story_id',
 		'task_hours',
+		'task_description',
 		'task_status',
-		'task_user',
 	),
 )); ?>

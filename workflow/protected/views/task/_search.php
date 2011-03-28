@@ -16,8 +16,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'task_description'); ?>
-		<?php echo $form->textField($model,'task_description',array('size'=>60,'maxlength'=>1000)); ?>
+		<?php echo $form->label($model,'task_user'); ?>
+		<?php echo $form->textField($model,'task_user'); ?>
 	</div>
 
 	<div class="row">
@@ -31,13 +31,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'task_status'); ?>
-		<?php echo $form->textField($model,'task_status'); ?>
+		<?php echo $form->label($model,'task_description'); ?>
+		<?php echo $form->textField($model,'task_description',array('size'=>60,'maxlength'=>1000)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'task_user'); ?>
-		<?php echo $form->textField($model,'task_user'); ?>
+		<?php echo $form->label($model,'task_status'); ?>
+		<?php echo $form->textField($model,'task_status'); ?>
 	</div>
 
 	<div class="row buttons">
