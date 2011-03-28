@@ -59,6 +59,7 @@ class Project extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'projectuser'=>array(self::HAS_MANY,'ProjectUser','project_id'),
+			'projectuserprofile'=>array(self::MANY_MANY,'Profile','project_user(project_id,user_id)'),
 		);
 	}
 
@@ -163,11 +164,12 @@ class Project extends CActiveRecord
 
 
 	public function getUserofproject(){
-		$projectusers=$this->projectuser;
+		$projectusers=$this->projectuserprofile;
 		$users=array();		
 		foreach ($projectusers as $projectuser) {
-			$users[]=$projectuser->user_id;
+			$users[]=$projectuser->firstname.' '.$projectuser->lastname;
 		}
+		return $users;
 	}
 
 	/**

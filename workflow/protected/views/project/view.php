@@ -26,7 +26,7 @@ $this->menu=array(
 		'project_name',
 		'project_description',
 		array(
-			'label'=>'Project Owner',
+			'label'=>'Status',
 			'type'=>'raw',
 			'value'=>$model->getProjectStatus()),
 		array(
@@ -39,4 +39,9 @@ $this->menu=array(
 			'value'=>date("d - m - Y",$model->end)),
 	),
 )); ?>
-
+<div>
+<h2>Members: </h2><br />
+<?php foreach ($model->getUserofproject() as $user) {?>
+	<label><?php echo CHtml::encode($user);?></label><br ></br>
+<?php } ?>
+</div>
