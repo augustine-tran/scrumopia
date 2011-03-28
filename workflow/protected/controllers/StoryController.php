@@ -31,7 +31,7 @@ class StoryController extends Controller
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','selectsprints'),
 				'users'=>array('@'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -174,14 +174,14 @@ class StoryController extends Controller
 		}
 	}
 
-	public function actionSelectSprints()
+	public function actionSelectsprints()
 	{
 		$data = Sprint::model()->findAll('sprint_id=:ID',
 		array(':ID'=>(int) $_POST['Story']['story_project']));
 
 
 		$data = CHtml::listData($data,'sprint_id','sprint_name');
-		
+		print_r($data);exit;
 		foreach($data as $id => $value)
 		{
 			echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);
