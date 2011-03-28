@@ -11,11 +11,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'sprint_code'); ?>
-		<?php echo $form->textField($model,'sprint_code',array('size'=>45,'maxlength'=>45)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'sprint_name'); ?>
 		<?php echo $form->textField($model,'sprint_name',array('size'=>45,'maxlength'=>45)); ?>
 	</div>

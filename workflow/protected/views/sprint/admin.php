@@ -43,7 +43,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'sprint_id',
-		'sprint_code',
 		'sprint_name',
 		'sprint_description',
 		'sprint_project',

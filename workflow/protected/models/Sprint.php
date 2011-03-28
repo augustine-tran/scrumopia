@@ -5,7 +5,6 @@
  *
  * The followings are the available columns in table 'sprint':
  * @property integer $sprint_id
- * @property string $sprint_code
  * @property string $sprint_name
  * @property string $sprint_description
  * @property integer $sprint_project
@@ -67,7 +66,6 @@ class Sprint extends CActiveRecord
 	{
 		return array(
 			'sprint_id' => 'Sprint',
-			'sprint_code' => 'Sprint Code',
 			'sprint_name' => 'Sprint Name',
 			'sprint_description' => 'Sprint Description',
 			'sprint_project' => 'Sprint Project',
@@ -87,7 +85,6 @@ class Sprint extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('sprint_id',$this->sprint_id);
-		$criteria->compare('sprint_code',$this->sprint_code,true);
 		$criteria->compare('sprint_name',$this->sprint_name,true);
 		$criteria->compare('sprint_description',$this->sprint_description,true);
 		$criteria->compare('sprint_project',$this->sprint_project);
