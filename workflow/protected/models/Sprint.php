@@ -56,6 +56,7 @@ class Sprint extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'project'=>array(self::BELONGS_TO,'Project', 'sprint_project'),
+			//'story'=>array(self::HAS_MANY,'Story','story_sprint'),
 		);
 	}
 
@@ -120,5 +121,15 @@ class Sprint extends CActiveRecord
 			default:
 				return '';
 		}
+	}
+	
+	/**
+	 * @return return story object
+	 */
+	public function getStory(){
+		$storysprints=$this->story;
+		print_r($storysprints);exit;
+		return $storysprints;
+		
 	}
 }

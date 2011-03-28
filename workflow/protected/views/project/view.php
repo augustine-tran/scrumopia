@@ -41,18 +41,22 @@ $this->menu=array(
 	),
 )); ?>
 <div>
-	<h2>Members: </h2><br />
+	<h2>Members: </h2>
 	<?php foreach ($model->getUserofproject() as $user) {?>
 		<label><?php echo CHtml::encode($user);?></label><br ></br>
 	<?php } ?>
 </div>
 
-<div><br/>
-	<h2>Sprint: </h2><br />
+<div id="sprint"><br/>
+	<h2>Sprint: </h2>
 	<?php foreach ($model->getSprintofproject() as $sprint) {?>
-		<label><?php echo CHtml::encode($sprint->sprint_name);?></label>
-		<?php echo CHtml::activeDropDownList(Sprint::model(),'sprint_project',
-				CHtml::listData(Project::model()->findAll(),'project_id','project_name'));?>
-		<br/>
+		<label><?php echo CHtml::link($sprint->sprint_name,array('sprint/view','id'=>$sprint->sprint_id));?></label><br/>
+			<div id="stories">
+				<h5>Story: </h5>
+				<?php foreach (Story::model()->findAll('story_sprint=:ID',array(':ID'=>$sprint->sprint_id)) as $story) {
+					echo CHtml::link($story->story_code,array('story/view','id'=>$story->story_id));?>
+					<br/>
+				<?php } ?>
+			</div><br />
 	<?php } ?>
 </div>
