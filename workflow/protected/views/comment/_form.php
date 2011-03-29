@@ -1,3 +1,4 @@
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -10,43 +11,11 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'user_id'); ?>
-		<?php echo $form->textField($model,'user_id'); ?>
-		<?php echo $form->error($model,'user_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'comment'); ?>
-		<?php echo $form->textArea($model, 'comment', array('rows'=>15, 'cols'=>70, 'maxlength'=>1000))?>
+		<?php echo $form->textArea($model, 'comment', array('rows'=>4, 'cols'=>50, 'maxlength'=>1000))?>
 		<?php echo $form->error($model,'comment'); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'comment_date'); ?>
-		<?php
-                $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                    'id'=>'comment_date',
-                    'model'=>$model,
-                    'attribute'=>'comment_date',
-                    // additional javascript options for the date picker plugin
-                    'options'=>array(
-                        'showAnim'=>'fold',
-                        'dateFormat'=>'yy-mm-dd',
-                    ),
-                    'htmlOptions'=>array(
-                    	'value'=>Date('Y-m-d'),
-                    ),
-                ));
-        ?>
-		<?php echo $form->error($model,'comment_date'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'comment_story'); ?>
-		<?php echo $form->textField($model,'comment_story'); ?>
-		<?php echo $form->error($model,'comment_story'); ?>
-	</div>
-
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

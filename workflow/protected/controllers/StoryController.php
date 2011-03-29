@@ -50,8 +50,11 @@ class StoryController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$story=$this->loadModel($id);
+		$comment=$this->createComment($story);
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$story,
+			'comment'=>$comment,
 		));
 	}
 
@@ -190,5 +193,18 @@ class StoryController extends Controller
 
 	}
 
-
+	protected function createComment($story)
+	{
+		$comment=new Comment;
+		if(isset($_POST['Comment']))
+		{
+			$comment->attributes=$_POST['Comment'];
+			if($story->addComment($comment))
+			{
+				Yii::app()->user->setFlash('commentSubmitted',"Your comment has been added." );
+				$this->refresh();
+			}
+		}
+		return $comment;
+	}
 }

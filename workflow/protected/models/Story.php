@@ -40,7 +40,7 @@ class Story extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('story_code, story_project, story_priority, story_point, story_status, story_sprint', 'required'),
+			array('story_code, story_project, story_priority, story_point, story_status,', 'required'),
 			array('story_project, story_priority, story_point, story_sprint', 'numerical', 'integerOnly'=>true),
 			array('story_code, story_status', 'length', 'max'=>45),
 			array('story_description', 'length', 'max'=>1000),
@@ -60,6 +60,8 @@ class Story extends CActiveRecord
 		return array(
 			'project'=>array(self::BELONGS_TO, 'Project', 'story_project'),
 			'sprint'=>array(self::BELONGS_TO, 'Sprint','story_sprint'),
+			'comments'=>array(self::HAS_MANY,'Comment','comment_story'),
+			'commentCount' => array(self::STAT, 'Comment', 'comment_story'),
 		);
 	}
 
@@ -142,5 +144,12 @@ class Story extends CActiveRecord
 		}
 	}
 	
-	
+/**
+	 * Adds a comment to this story
+	 */
+	public function addComment($comment)
+	{
+		$comment->comment_story=$this->story_id;
+		return $comment->save();
+	}
 }
