@@ -4,7 +4,7 @@
  * This is the model class for table "file".
  *
  * The followings are the available columns in table 'file':
- * @property integer $fille_id
+ * @property integer $file_id
  * @property string $file_path
  * @property string $file_type
  * @property string $file_description
@@ -37,14 +37,14 @@ class File extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('file_path, file_type', 'required'),
+			array('file_path', 'required'),
 			array('story_id', 'numerical', 'integerOnly'=>true),
 			array('file_path', 'length', 'max'=>128),
 			array('file_type', 'length', 'max'=>45),
 			array('file_description', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('fille_id, file_path, file_type, file_description, story_id', 'safe', 'on'=>'search'),
+			array('file_id, file_path, file_type, file_description, story_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,7 +65,7 @@ class File extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'fille_id' => 'Fille',
+			'file_id' => 'File',
 			'file_path' => 'File Path',
 			'file_type' => 'File Type',
 			'file_description' => 'File Description',
@@ -84,7 +84,7 @@ class File extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('fille_id',$this->fille_id);
+		$criteria->compare('file_id',$this->file_id);
 		$criteria->compare('file_path',$this->file_path,true);
 		$criteria->compare('file_type',$this->file_type,true);
 		$criteria->compare('file_description',$this->file_description,true);

@@ -37,13 +37,13 @@ class Comment extends TrackStarActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, comment, comment_date, comment_story', 'required'),
-			array('user_id, comment_story', 'numerical', 'integerOnly'=>true),
-			array('comment', 'length', 'max'=>1000),
-			array('comment_date,','safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('comment_id, user_id, comment, comment_date, comment_story', 'safe', 'on'=>'search'),
+		array('user_id, comment, comment_date, comment_story', 'required'),
+		array('user_id, comment_story', 'numerical', 'integerOnly'=>true),
+		array('comment', 'length', 'max'=>1000),
+		array('comment_date,','safe'),
+		// The following rule is used by search().
+		// Please remove those attributes that should not be searched.
+		array('comment_id, user_id, comment, comment_date, comment_story', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,6 +57,7 @@ class Comment extends TrackStarActiveRecord
 		return array(
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
       		'story' => array(self::BELONGS_TO, 'Story', 'comment_story'),
+			'file'=>array(self::HAS_MANY,'File','story_id'),
 		);
 	}
 

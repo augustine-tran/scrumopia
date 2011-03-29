@@ -86,12 +86,12 @@ insert  into `comment`(`comment_id`,`user_id`,`comment`,`comment_date`,`comment_
 DROP TABLE IF EXISTS `file`;
 
 CREATE TABLE `file` (
-  `fille_id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_id` int(11) NOT NULL AUTO_INCREMENT,
   `file_path` varchar(128) NOT NULL,
   `file_type` varchar(45) NOT NULL,
   `file_description` varchar(1000) DEFAULT NULL,
   `story_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`fille_id`)
+  PRIMARY KEY (`file_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `file` */

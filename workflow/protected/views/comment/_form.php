@@ -7,9 +7,8 @@
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
-
+	<?php echo $form->errorSummary(array($model)); ?>
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'comment'); ?>
 		<?php echo $form->textArea($model, 'comment', array('rows'=>4, 'cols'=>50, 'maxlength'=>1000))?>

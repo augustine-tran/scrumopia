@@ -54,9 +54,12 @@ $this->menu=array(
     <div class="flash-success">
       <?php echo Yii::app()->user->getFlash('commentSubmitted'); ?>
     </div>
-  <?php else: ?>
     <?php $this->renderPartial('/comment/_form',array(
       'model'=>$comment,
+    )); ?>
+  <?php else: ?>
+    <?php $this->renderPartial('/comment/_form',array(
+      'model'=>$comment,'file'=>$file,
     )); ?>
   <?php endif; ?>
 </div>

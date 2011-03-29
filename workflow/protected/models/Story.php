@@ -62,6 +62,7 @@ class Story extends CActiveRecord
 			'sprint'=>array(self::BELONGS_TO, 'Sprint','story_sprint'),
 			'comments'=>array(self::HAS_MANY,'Comment','comment_story'),
 			'commentCount' => array(self::STAT, 'Comment', 'comment_story'),
+			'file'=>array(self::HAS_MANY,'File','story_id'),
 		);
 	}
 
