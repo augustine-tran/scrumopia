@@ -46,8 +46,21 @@ $this->menu=array(
     <h3>
       <?php echo $model->commentCount>1 ? $model->commentCount . ' comments' : 'One comment'; ?>
     </h3>
-    <?php $this->renderPartial('_comments',array('comments'=>$model->comments,
-    )); ?>
+    <?php //Viewing comment in CListView
+		$dataProvider=new CActiveDataProvider('Comment', array(
+		    'criteria'=>array(
+		        'condition'=>'comment_story='.$model->story_id,
+		        'order'=>'comment_date DESC',
+		    ),
+		    'pagination'=>array(
+		        'pageSize'=>10,
+		    ),
+		));
+			
+		$this->widget('zii.widgets.CListView', array(
+			'dataProvider'=>$dataProvider,
+			'itemView'=>'_comments',
+		)); ?>
   <?php endif; ?>
   <h3>Leave a Comment</h3>
   <?php if(Yii::app()->user->hasFlash('commentSubmitted')): ?>
@@ -59,7 +72,8 @@ $this->menu=array(
     )); ?>
   <?php else: ?>
     <?php $this->renderPartial('/comment/_form',array(
-      'model'=>$comment,'file'=>$file,
+      'model'=>$comment,
     )); ?>
   <?php endif; ?>
 </div>
+

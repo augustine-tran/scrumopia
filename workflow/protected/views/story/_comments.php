@@ -1,14 +1,11 @@
-<?php foreach($comments as $comment): ?>
-<div class="comment">
-      <div class="author">
-    <b><?php echo $comment->user->username; ?>:</b>
-  </div>
-  <div class="time">
-    on <?php echo date('F j, Y \a\t h:i a',strtotime($comment->comment_date)); ?>
-  </div>
-  <div class="content">
-  <?php echo nl2br(CHtml::encode($comment->comment)); ?>
-  </div>
-     <hr>
-</div><!-- comment -->
-<?php endforeach; ?>
+<div class="view">
+	<b><?php echo CHtml::encode(User::model()->findBypk($data->user_id)->username); ?></b>
+	<br />
+	
+	On: 
+	<?php echo CHtml::encode(date('F j, Y \a\t h:i a',strtotime($data->comment_date))); ?>
+	<br />
+	
+	<?php echo CHtml::encode($data->comment); ?>
+</div>
+<hr>
