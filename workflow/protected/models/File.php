@@ -5,9 +5,9 @@
  *
  * The followings are the available columns in table 'file':
  * @property integer $file_id
- * @property string $file_path
- * @property string $file_type
- * @property string $file_description
+ * @property string $name
+ * @property string $mime_type
+ * @property integer $size
  * @property integer $story_id
  */
 class File extends CActiveRecord
@@ -37,14 +37,13 @@ class File extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('file_path', 'required'),
-			array('story_id', 'numerical', 'integerOnly'=>true),
-			array('file_path', 'length', 'max'=>128),
-			array('file_type', 'length', 'max'=>45),
-			array('file_description', 'length', 'max'=>1000),
+			array('name, mime_type, size, story_id', 'required'),
+			array('size, story_id', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>128),
+			array('mime_type', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('file_id, file_path, file_type, file_description, story_id', 'safe', 'on'=>'search'),
+			array('file_id, name, mime_type, size, story_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,9 +65,9 @@ class File extends CActiveRecord
 	{
 		return array(
 			'file_id' => 'File',
-			'file_path' => 'File Path',
-			'file_type' => 'File Type',
-			'file_description' => 'File Description',
+			'name' => 'Name',
+			'mime_type' => 'Mime Type',
+			'size' => 'Size',
 			'story_id' => 'Story',
 		);
 	}
@@ -85,9 +84,9 @@ class File extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('file_id',$this->file_id);
-		$criteria->compare('file_path',$this->file_path,true);
-		$criteria->compare('file_type',$this->file_type,true);
-		$criteria->compare('file_description',$this->file_description,true);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('mime_type',$this->mime_type,true);
+		$criteria->compare('size',$this->size);
 		$criteria->compare('story_id',$this->story_id);
 
 		return new CActiveDataProvider(get_class($this), array(

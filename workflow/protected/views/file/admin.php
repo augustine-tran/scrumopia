@@ -43,9 +43,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'file_id',
-		'file_path',
-		'file_type',
-		'file_description',
+		'name',
+		'mime_type',
+		'size',
 		'story_id',
 		array(
 			'class'=>'CButtonColumn',

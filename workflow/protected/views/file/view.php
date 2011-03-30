@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Files'=>array('index'),
-	$model->file_id,
+	$model->name,
 );
 
 $this->menu=array(
@@ -19,9 +19,9 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'file_id',
-		'file_path',
-		'file_type',
-		'file_description',
+		'name',
+		'mime_type',
+		'size',
 		'story_id',
 	),
 )); ?>

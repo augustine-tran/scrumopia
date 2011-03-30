@@ -11,18 +11,18 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'file_path'); ?>
-		<?php echo $form->textField($model,'file_path',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->label($model,'name'); ?>
+		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>128)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'file_type'); ?>
-		<?php echo $form->textField($model,'file_type',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->label($model,'mime_type'); ?>
+		<?php echo $form->textField($model,'mime_type',array('size'=>45,'maxlength'=>45)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'file_description'); ?>
-		<?php echo $form->textField($model,'file_description',array('size'=>60,'maxlength'=>1000)); ?>
+		<?php echo $form->label($model,'size'); ?>
+		<?php echo $form->textField($model,'size'); ?>
 	</div>
 
 	<div class="row">

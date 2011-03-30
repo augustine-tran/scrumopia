@@ -31,7 +31,7 @@ class FileController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','IUpload'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -172,5 +172,53 @@ class FileController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+/**
+	 * This is the default 'index' action that is invoked
+	 * when an action is not explicitly requested by users.
+	 */
+	public function actionIUpload()
+	{
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$model = new UploadForm;
+		$this->render('create', array(
+			'model' => $model,
+		));
+	}
+
+	public function actionQueue(){
+		$model = new UploadForm;
+		$this->render('queue', array(
+			'model' => $model,
+		));
+	}
+
+	public function actionUpload($parent_id) {
+		//$parent_id = Yii::app()->request->getQuery("parent_id", 1);
+		$model = new UploadForm;
+		/*if(!isset($_POST["UploadForm"])){
+			$model->attributes =$_POST["UploadForm"];
+		}*/
+		$model->file = CUploadedFile::getInstance($model, 'file');
+		//$model->parent_id = $parent_id;
+		$model->mime_type = $model->file->getType();
+		$model->size = $model->file->getSize();
+		$model->name = time();
+		//$model->story_id=$_GET('storyID');
+		if ($model->validate()) {
+			$path = realpath(Yii::app()->getBasePath()."/../images/uploads")."/{$parent_id}/";
+			if(!is_dir($path)){
+				mkdir($path);
+			}
+			$model->file->saveAs($path.$model->name);
+			echo CJSON::encode($model->attributes);
+		} else {
+			echo CVarDumper::dumpAsString($model->getErrors());
+			Yii::log("FileUpload: ".CVarDumper::dumpAsString($model->getErrors()), CLogger::LEVEL_ERROR, "application.controllers.SiteController");
+			throw new CHttpException(500, "Could not upload file");
+		}
+
 	}
 }
