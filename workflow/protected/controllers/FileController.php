@@ -31,7 +31,7 @@ class FileController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','IUpload'),
+				'actions'=>array('create','update','iUpload','upload'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -198,15 +198,16 @@ class FileController extends Controller
 	public function actionUpload($parent_id) {
 		//$parent_id = Yii::app()->request->getQuery("parent_id", 1);
 		$model = new UploadForm;
-		/*if(!isset($_POST["UploadForm"])){
-			$model->attributes =$_POST["UploadForm"];
-		}*/
-		$model->file = CUploadedFile::getInstance($model, 'file');
-		//$model->parent_id = $parent_id;
-		$model->mime_type = $model->file->getType();
-		$model->size = $model->file->getSize();
-		$model->name = time();
-		//$model->story_id=$_GET('storyID');
+		if(!isset($_POST["UploadForm"])){
+			//$model->attributes =$_POST["UploadForm"];
+    		$model->file = CUploadedFile::getInstance($model, 'file');
+    		//$model->parent_id = $parent_id;
+    		$model->mime_type = $model->file->getType();
+    		$model->size = $model->file->getSize();
+    		$model->name = time();
+    		$model->story_id=$_GET['id'];
+		}
+		$model->save();
 		if ($model->validate()) {
 			$path = realpath(Yii::app()->getBasePath()."/../images/uploads")."/{$parent_id}/";
 			if(!is_dir($path)){
