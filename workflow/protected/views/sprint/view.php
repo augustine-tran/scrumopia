@@ -29,5 +29,39 @@ $this->menu=array(
 			'label'=>'Status',
 			'type'=>'raw',
 			'value'=>$model->getSprintstatuscaption()),
+		array(
+            'label'=>'Sprint hours',
+            'type'=>'raw',
+            'value'=>$model->sprintHours()),
+		array(
+            'label'=>'Sprint burn down',
+            'type'=>'raw',
+            'value'=>$model->burnDown()),
 	),
-)); ?>
+));?>
+<link rel="stylesheet" type="text/css" href="../../css/ext-all.css" />
+<script type="text/javascript" src="../../script/bootstrap.js"></script>
+<script type="text/javascript" src="../../script/gridPanelJSon.js"></script>
+<div id="gridPanelJSon"></div>
+
+<!-- page specific -->
+    <style type="text/css">
+        /* style rows on mouseover */
+        .x-grid-row-over .x-grid-cell-inner {
+            font-weight: bold;
+        }
+        /* shared styles for the ActionColumn icons */
+        .x-action-col-cell img {
+            height: 16px;
+            width: 16px;
+            cursor: pointer;
+        }
+        /* custom icon for the "buy" ActionColumn icon */
+        .x-action-col-cell img.buy-col {
+            background-image: url(../shared/icons/fam/accept.gif);
+        }
+        /* custom icon for the "alert" ActionColumn icon */
+        .x-action-col-cell img.alert-col {
+            background-image: url(../shared/icons/fam/error.gif);
+        }
+    </style>

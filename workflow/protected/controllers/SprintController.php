@@ -27,7 +27,7 @@ class SprintController extends Controller
 	{
 		return array(
 		array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','GetStoriesJSon'),
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -186,5 +186,12 @@ class SprintController extends Controller
 			echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);
 		}
 
+	}
+	
+	public function actionGetStoriesJSon(){
+	    
+	    $sprintId=$_GET['id'];
+	    $model=Sprint::model()->findByPk((int)$sprintId);
+	    echo $model->getStoriesJSon();
 	}
 }

@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'List Story', 'url'=>array('index')),
-	array('label'=>'Create Story', 'url'=>array('create')),
+	//array('label'=>'Create Story', 'url'=>array('create')),
 	array('label'=>'Update Story', 'url'=>array('update', 'id'=>$model->story_id)),
 	array('label'=>'Delete Story', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->story_id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Story', 'url'=>array('admin')),
@@ -80,6 +80,4 @@ $this->menu=array(
 <?php $this->renderPartial("/file/_form",array(
       'model'=>$file,'id'=>$model->story_id,
     )); ?>
-
-
 

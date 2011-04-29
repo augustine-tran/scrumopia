@@ -63,6 +63,7 @@ class Story extends CActiveRecord
 			'comments'=>array(self::HAS_MANY,'Comment','comment_story'),
 			'commentCount' => array(self::STAT, 'Comment', 'comment_story'),
 			'file'=>array(self::HAS_MANY,'File','story_id'),
+            'task'=>array(self::HAS_MANY,'Task','story_id'),
         );
     }
 
@@ -80,7 +81,7 @@ class Story extends CActiveRecord
 			'story_priority' => 'Priority',
 			'story_point' => 'Point',
 			'story_status' => 'Status',
-        	
+         
         );
     }
 
@@ -154,12 +155,4 @@ class Story extends CActiveRecord
         return $comment->save();
     }
 
-    /**
-     * Adds a file to this story
-     */
-    public function addFile($file)
-    {
-        $file->story_id=$this->story_id;
-        return $file->save();
-    }
 }

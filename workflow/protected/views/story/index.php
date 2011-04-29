@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Story', 'url'=>array('create')),
+	//array('label'=>'Create Story', 'url'=>array('create')),
 	array('label'=>'Manage Story', 'url'=>array('admin')),
 );
 ?>
